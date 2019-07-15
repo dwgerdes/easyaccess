@@ -49,7 +49,7 @@ except ImportError:
 positive = ['yes', 'y', 'true', 't', 'on']
 negative = ['no', 'n', 'false', 'f', 'off']
 input_options = ', '.join([i[0]+'/'+i[1] for i in zip(positive, negative)])
-dbnames = ('dessci', 'desoper', 'destest', 'desdr')
+dbnames = ('dessci', 'desoper', 'destest', 'desdr', 'umtno')
 
 # commands not available in public DB
 NOT_PUBLIC = ['add_comment', 'append_table', 'change_db', 'execproc',
@@ -962,7 +962,7 @@ Connected as {user} to {db}.
             query = 'select distinct username from dba_users order by username'
         if self.dbname in ('destest'):
             query = 'select distinct username from dba_users order by username'
-        if self.dbname in ('desdr'):
+        if self.dbname in ('desdr', 'umtno'):
             return []
         temp = self.cur.execute(query)
         tnames = pd.DataFrame(temp.fetchall())
