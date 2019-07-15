@@ -164,6 +164,7 @@ def get_desconfig(desfile, db, verbose=True, user=None, pw1=None):
     """
     server_desdm = 'desdb.ncsa.illinois.edu'
     server_public = 'desdb-dr.ncsa.illinois.edu'
+    server_umtno = 'telugu.web.itd.umich.edu'
     port_n = '1521'
 
     if not db[:3] == 'db-':
@@ -181,7 +182,7 @@ def get_desconfig(desfile, db, verbose=True, user=None, pw1=None):
         if verbose:
             print()
 
-    databases = ['db-dessci', 'db-desdr', 'db-destest', 'db-desoper']
+    databases = ['db-dessci', 'db-desdr', 'db-destest', 'db-desoper', 'db-umtno']
 
     if db not in databases and not config.has_section(db):
         msg = '\nDatabase entered is not in %s '%databases
@@ -203,6 +204,9 @@ def get_desconfig(desfile, db, verbose=True, user=None, pw1=None):
             kwargs = {'host': server_desdm, 'port': port_n, 'service_name': 'destest'}
         elif db == 'db-desoper':
             kwargs = {'host': server_desdm, 'port': port_n, 'service_name': 'desoper'}
+        elif db == 'db-umtno':
+            kwargs = {'host': server_umtno, 'port': port_n, 'service_name': 'TELUGU'}
+            print(kwargs)
         else:
             kwargs = {'host': server_desdm, 'port': port_n, 'service_name': db[3:]}
         dsn = cx_Oracle.makedsn(**kwargs)
